@@ -1,5 +1,14 @@
 name: Deploy to GitHub Pages
 
+permissions:
+  contents: write   # 👈 Add this
+
+on:
+  push:
+    branches: [main]
+...concurrency:
+name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [main]
