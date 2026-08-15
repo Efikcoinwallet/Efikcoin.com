@@ -1,40 +1,39 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Efikcoin EFC - Life Empowerment</title><style>body{margin:0;background:#070a12;color:#fff;font-family:system-ui;text-align:center;padding:20px} .card{background:#12182a;border:1px solid #1f2a44;border-radius:20px;padding:30px;max-width:600px;margin:20px auto} .logo{width:180px;height:180px;border-radius:50%;margin:0 auto;border:4px solid #f0b90b;box-shadow:0 0 50px rgba(240,185,11,0.5)} .btn{display:inline-block;padding:12px 24px;border-radius:10px;font-weight:700;margin:6px;text-decoration:none} .gold{background:#f0b90b;color:#000} .dark{background:#1a2339;color:#fff;border:1px solid #2a3a5c} code{display:block;background:#0a0f1d;border:1px solid #1e2a44;padding:12px;border-radius:8px;word-break:break-all;margin:10px 0;font-size:12px}</style></head><body>
-<img src="https://raw.githubusercontent.com/efikcoineternalv/efikcoin-rpc/main/logo.png" class="logo" onerror="this.style.background='gold';this.alt='EFC'">
-<h1 style="font-size:42px;margin:20px 0;background:linear-gradient(90deg,#ffdf70,#f0b90b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Efikcoin<br>EFC - Life Empowerment</h1>
-<p>Built for school fees, food, daily expenses in Aba and beyond.</p>
-<div class="card">
-<h3>Official Contract</h3>
-<code>0x677ce9cba67f7484ea951a12897ce780cfd8fed1</code>
-<a href="https://pancakeswap.finance/swap?outputCurrency=0x677ce9cba67f7484ea951a12897ce780cfd8fed1" class="btn gold" target="_blank">Buy EFC</a>
-<a href="https://bscscan.com/token/0x677ce9cba67f7484ea951a12897ce780cfd8fed1" class="btn dark" target="_blank">BscScan</a>
-</div>
-<div class="card">
-<h3>🔗 Official Infrastructure Linked</h3>
-<p><strong>efikcoin.com</strong> (This website) uses <strong>rpc.efikcoin.com/rpc</strong> (Your blockchain node)</p>
-<code>RPC URL: https://rpc.efikcoin.com/rpc<br>Chain ID: 56 - BSC Mainnet</code>
-<a href="https://rpc.efikcoin.com" class="btn gold" target="_blank">Check RPC Status</a>
-</div>
-<p style="color:#6b7a95;font-size:13px;margin-top:30px">© 2026 Efikcoin • rpc.efikcoin.com linked to efikcoin.com</p>
-  <button onclick="addEfikcoin()" style="background:gold;padding:12px 24px;border-radius:10px;font-weight:bold;">
-  Add Efikcoin Mainnet to MetaMask
-</button>
-
+<!DOCTYPE html>
+<html>
+<head><title>Efikcoin Explorer - Chain ID 20488</title>
+<meta name="viewport" content="width=device-width">
+<style>body{background:#000;color:#0f0;font-family:monospace;padding:20px} .box{border:1px solid #0f0;padding:15px;margin:10px 0} h1{color:#fff}</style>
+</head>
+<body>
+<h1>Efikcoin Chain Explorer</h1>
+<div class="box">Chain ID: 20488 | Symbol: EFC | RPC: rpc.efikcoin.com/rpc | Founder: 0xC5AD5c...7cCA</div>
+<div class="box" id="status">Connecting to Chain 20488...</div>
+<div class="box"><h3>Latest Block</h3><div id="block">Loading...</div></div>
+<div class="box"><h3>Check Address</h3><input id="addr" placeholder="0x..." style="width:80%"><button onclick="checkBal()">Check</button><div id="bal"></div></div>
 <script>
-async function addEfikcoin(){
-  try{
-    await window.ethereum.request({
-      method: 'wallet_addEthereumChain',
-      params: [{
-        chainId: '0x25A4',
-        chainName: 'Efikcoin Mainnet',
-        rpcUrls: ['https://rpc.efikcoin.com'],
-        nativeCurrency: { name: 'Efikcoin', symbol: 'EFC', decimals: 18 },
-        blockExplorerUrls: ['https://scan.efikcoin.com'],
-        iconUrls: ['https://ipfs.io/ipfs/bafybeihrzyodihyp5met2hs32ppj37qlowuxarvs2lnlrgujgrlwxc7fwe']
-      }]
-    });
-    alert('Efikcoin Mainnet 9636 Added!');
-  }catch(e){ alert(e.message); }
+async function rpc(method, params=[]){
+  const res = await fetch("https://rpc.efikcoin.com/rpc", {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({jsonrpc:"2.0", id:1, method, params})
+  });
+  return (await res.json()).result;
 }
+async function load(){
+  try{
+    const chain = await rpc("eth_chainId");
+    const block = await rpc("eth_blockNumber");
+    document.getElementById("status").innerHTML = `✅ Connected! Chain ID: ${parseInt(chain,16)} (${chain}) | Block: ${parseInt(block,16)}`;
+    document.getElementById("block").innerHTML = `Block Number: ${parseInt(block,16)}<br>Chain ID Verified: 20488 = 0x5008<br>Gas Token: EFC`;
+  }catch(e){
+    document.getElementById("status").innerHTML = "❌ RPC offline - deploy worker: "+e;
+  }
+}
+async function checkBal(){
+  const addr = document.getElementById("addr").value;
+  const bal = await rpc("eth_getBalance", [addr, "latest"]);
+  document.getElementById("bal").innerHTML = `Balance: ${parseInt(bal,16)/1e18} EFC on Chain 20488`;
+}
+load();
 </script>
-</body></html>
+</body>
+</html>
