@@ -6,7 +6,7 @@ interface IEFC {
     function transfer(address to, uint256 amount) external returns (bool);
 }
 
-contractonTo20488 {
+contract EfikcoinMigrationTo20488 {
     address public constant EFC_BEP20 = 0x677Ce9CBa67f7484ea951a12897CE780cFd8fED1;
     address public founder = 0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA;
     uint256 public constant CHAIN_ID_20488 = 20488;
