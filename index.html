@@ -15,4 +15,26 @@
 <a href="https://rpc.efikcoin.com" class="btn gold" target="_blank">Check RPC Status</a>
 </div>
 <p style="color:#6b7a95;font-size:13px;margin-top:30px">© 2026 Efikcoin • rpc.efikcoin.com linked to efikcoin.com</p>
+  <button onclick="addEfikcoin()" style="background:gold;padding:12px 24px;border-radius:10px;font-weight:bold;">
+  Add Efikcoin Mainnet to MetaMask
+</button>
+
+<script>
+async function addEfikcoin(){
+  try{
+    await window.ethereum.request({
+      method: 'wallet_addEthereumChain',
+      params: [{
+        chainId: '0x25A4',
+        chainName: 'Efikcoin Mainnet',
+        rpcUrls: ['https://rpc.efikcoin.com'],
+        nativeCurrency: { name: 'Efikcoin', symbol: 'EFC', decimals: 18 },
+        blockExplorerUrls: ['https://scan.efikcoin.com'],
+        iconUrls: ['https://ipfs.io/ipfs/bafybeihrzyodihyp5met2hs32ppj37qlowuxarvs2lnlrgujgrlwxc7fwe']
+      }]
+    });
+    alert('Efikcoin Mainnet 9636 Added!');
+  }catch(e){ alert(e.message); }
+}
+</script>
 </body></html>
