@@ -1,0 +1,10 @@
+{
+  "name": "Efikcoin",
+  "symbol": "EFC",
+  "type": "BEP20",
+  "decimals": 18,
+  "description": "Efikcoin EFC built over years with blood and legacy for human survival, employment and next generation growth. Self-custodial wallet, payments, staking. Legacy BSC: 0x677ce9cba67f7484ea951a12897ce780cfd8fed1. Mainnet Chain ID 9636 - rpc.efikcoin.com",
+  "website": "https://efikcoin.com",
+  "explorer": "https://bscscan.com/token/0x677ce9cba67f7484ea951a12897ce780cfd8fed1",
+  "logo": "https://ipfs.io/ipfs/bafybeihrzyodihyp5met2hs32ppj37qlowuxarvs2lnlrgujgrlwxc7fwe"
+}
